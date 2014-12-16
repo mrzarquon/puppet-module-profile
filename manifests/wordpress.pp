@@ -6,7 +6,7 @@ class profile::wordpress (
   $wordpress_group_name    = 'wordpress',
   $wordpress_user_home     = '/var/www/wordpress',
   $mysql_root_password     = 'password',
-  $wordpress_db_host       = 'wordpress',
+  $wordpress_db_host       = 'localhost',
   $wordpress_db_name       = 'wordpress',
   $wordpress_db_user       = 'wordpress',
   $wordpress_db_password   = 'wordpress',
@@ -51,5 +51,11 @@ class profile::wordpress (
     db_host     => $wordpress_db_host,
     db_user     => $wordpress_db_user,
     db_password => $wordpress_db_password,
+  }
+
+  firewall { '100 allow connections to wordpress':
+    proto   => 'tcp',
+    dport   => '80',
+    action  => 'accept',
   }
 }
